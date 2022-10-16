@@ -50,7 +50,7 @@ class Sitemap
     }
 
     public function url(string $url){
-        $this->url = $url;
+        $this->url = substr($url,0,4)=='http' ? $url : rtrim(config('app.url'),'/').'/'.ltrim($url,'/');
         return $this;
     }
 
@@ -70,13 +70,22 @@ class Sitemap
             $url = [];
             $list = $db->where($this->where)->select($this->field)->forPage($i,50000)->get();
             foreach ($list as $val){
-                $url[] = 'http://www.php127.com/'.$val->id.'.html';
+                $url[] = $this->getUrl($val);
             }
 
             $this->write($i,join("\n",$url));
             $i++;
         }
 
+    }
+
+
+    public function getUrl($obj){
+        foreach ($this->field as $field){
+            $url = str_replace('{'.$field.'}',$obj->$field,$this->url);
+        }
+
+        return $url;
     }
 
     public function __destruct()

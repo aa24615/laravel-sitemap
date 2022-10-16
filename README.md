@@ -69,8 +69,7 @@ $sitemap->table('article')->field(['id'])->url('/user/{id}.html')->make();
 ```
 
 ## 生成结果
-
-/sitemap/map.txt 为索引文件对应下面的url  请将这里的网址添加到百度站长即可 
+暂时仅支持txt格式 /sitemap/map.txt 为索引文件对应下面的url  请将这里的网址添加到百度站长即可 
 ```json
 http://www.php.net/sitemap/article_1.txt
 http://www.php.net/sitemap/article_2.txt

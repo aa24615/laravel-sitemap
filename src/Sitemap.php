@@ -81,8 +81,9 @@ class Sitemap
 
 
     public function getUrl($obj){
+        $url = $this->url;
         foreach ($this->field as $field){
-            $url = str_replace('{'.$field.'}',$obj->$field,$this->url);
+            $url = str_replace('{'.$field.'}',$obj->$field,$url);
         }
 
         return $url;
